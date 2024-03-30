@@ -72,27 +72,25 @@ public class Cafe extends Building {
     //overloaded sellCoffee with variable restocking
     public void sellCoffee(int size, int nSugarPackets, int nCreams,
                            int restockCoffee, int restockSugarPackets, int restockCream, int restockCups) {
-        //sees if order will go below avaliable inventory
-        //ADD BOOLEAN VARIABLE TO THIS TO EVALUATE IF HARD-CODED RESTOCK NECESSARY
-        if ((this.nCoffeeOunces - size) < 0) {
+        //evalutates if order will go below inventory
+        boolean coffee_out = this.nCoffeeOunces - size < 0;
+        boolean sugar_out = this.nSugarPackets - nSugarPackets < 0;
+        boolean cream_out = this.nCreams - nCreams < 0;
+        boolean cups_out = this.nCups - nCups < 0;
+        if (coffee_out == true) {
             System.out.println("There is not enough coffee to make that order.");
-            //if so, adds to restock
-            restockCoffee = 20;
         }
-        if ((this.nSugarPackets - nSugarPackets) < 0) {
+        if (sugar_out == true) {
             System.out.println("There are not enough sugar packets to make that order.");
-            restockSugarPackets = 3;
         }
-        if ((this.nCreams - nCreams) < 0) {
+        if (cream_out == true) {
             System.out.println("There are not enough splashes of cream to make that order.");
-            restockCream = 3;
         }
-        if ((this.nCups - nCups) < 0) {
+        if (cups_out == true) {
             System.out.println("There are not enough cups to make this order.");
-            restockCups = 5;
         }
         //if any restock variable is above 0, restocks cafe
-        if ((this.nCoffeeOunces - size) < 0 || (restockSugarPackets != 0) || (restockCream != 0) || (restockCups != 0)) {
+        if (coffee_out == true || sugar_out == true || cream_out == true || cups_out == true) {
             restock(restockCoffee, restockSugarPackets, restockCream, restockCups);
         }
         //makes order
@@ -138,14 +136,14 @@ public class Cafe extends Building {
     }
 
     public static void main(String[] args) {
-        Cafe cafe = new Cafe("Tatte", "Boston");
+        Cafe cafe = new Cafe("Tatte", "Boston", 5, 2, 6, 3);
         System.out.println(cafe);
         for (int i = 1; i < 6; i++) {
-            cafe.sellCoffee(12, 3, 2);
+            cafe.sellCoffee(12, 3, 2, 20, 10, 10, 10);
         }
         cafe.showOptions();
         cafe.enter();
-        cafe.goUp();
+        //cafe.goUp();
 
     }
 

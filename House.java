@@ -109,7 +109,7 @@ public class House extends Building {
     }
 
     public static void main(String[] args) {
-        House house = new House("home", "624", 5, true, false);
+        House house = new House("home", "624", 5);
         System.out.println(house);
         try {
             house.moveIn("Zoe", true);
