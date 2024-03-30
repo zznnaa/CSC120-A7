@@ -59,14 +59,17 @@ public class House extends Building {
      * @throws RuntimeException Resident already belongs to the house.
      */
     public void moveIn(String name) {
+        System.out.print("Moving resident in...");
         if (isResident(name) == true) {
           throw new RuntimeException("This person is already a resident.");
         }
         this.residents.add(name);
+        System.out.println("Success!");
     }
 
-    //moves resident with accomodations into a house
+    //overloaded moveIn - moves resident with accomodations into a house
     public void moveIn(String name, boolean accomodations){
+        System.out.print("Moving resident (with accomodations) in...");
         if (isResident(name) == true) {
             throw new RuntimeException("This person is already a resident.");
         }
@@ -74,6 +77,7 @@ public class House extends Building {
             throw new RuntimeException("This person cannot move into a House without an elevator.");
         }
         this.residents.add(name);
+        System.out.println("Success!");
     }
 
     /**
@@ -83,10 +87,12 @@ public class House extends Building {
      * @throws RuntimeException Resident is not part of the house.
      */
     public String moveOut(String name) {
+        System.out.print("Moving resident out...");
         if (isResident(name) == false) {
             throw new RuntimeException("This person is not a resident.");
         }
         this.residents.remove(name);
+        System.out.println("Success!");
         return name;
     }
 

@@ -5,12 +5,22 @@ public class Cafe extends Building {
     private int nCreams;
     private int nCups;
 
+    //default constructor
     public Cafe(String name, String address) {
         super(name, address);
         this.nCoffeeOunces = 20;
         this.nSugarPackets = 10;
         this.nCreams = 10;
         this.nCups = 5;
+    }
+
+    //overloaded constructor with variable starting stock
+    public Cafe(String name, String address, int coffeeOunces, int sugarPackets, int creams, int cups){
+        super(name, address);
+        this.nCoffeeOunces = coffeeOunces;
+        this.nSugarPackets = sugarPackets;
+        this.nCreams = creams;
+        this.nCups = cups;
     }
 
     /**
@@ -59,6 +69,43 @@ public class Cafe extends Building {
 
     }
 
+    //overloaded sellCoffee with variable restocking
+    public void sellCoffee(int size, int nSugarPackets, int nCreams,
+                           int restockCoffee, int restockSugarPackets, int restockCream, int restockCups) {
+        //sees if order will go below avaliable inventory
+        //ADD BOOLEAN VARIABLE TO THIS TO EVALUATE IF HARD-CODED RESTOCK NECESSARY
+        if ((this.nCoffeeOunces - size) < 0) {
+            System.out.println("There is not enough coffee to make that order.");
+            //if so, adds to restock
+            restockCoffee = 20;
+        }
+        if ((this.nSugarPackets - nSugarPackets) < 0) {
+            System.out.println("There are not enough sugar packets to make that order.");
+            restockSugarPackets = 3;
+        }
+        if ((this.nCreams - nCreams) < 0) {
+            System.out.println("There are not enough splashes of cream to make that order.");
+            restockCream = 3;
+        }
+        if ((this.nCups - nCups) < 0) {
+            System.out.println("There are not enough cups to make this order.");
+            restockCups = 5;
+        }
+        //if any restock variable is above 0, restocks cafe
+        if ((this.nCoffeeOunces - size) < 0 || (restockSugarPackets != 0) || (restockCream != 0) || (restockCups != 0)) {
+            restock(restockCoffee, restockSugarPackets, restockCream, restockCups);
+        }
+        //makes order
+        System.out.print("Making coffee...");
+        this.nCoffeeOunces -= size;
+        this.nSugarPackets -= nSugarPackets;
+        this.nCreams -= nCreams;
+        this.nCups -= 1;
+        System.out.println("Success!");
+        System.out.println("Order up! " + size + "oz coffee with " + nSugarPackets + " sugar(s) and " + nCreams + " cream(s).");
+
+    }
+
     /**
      * Restocks inventory in cafe.
      *
@@ -89,8 +136,6 @@ public class Cafe extends Building {
             throw new RuntimeException("You cannot leave the ground floor. The cafe's higher levels are reserved for staff.");
         }
     }
-
-    //question: do we need to make restocking contingent on being inside the building?
 
     public static void main(String[] args) {
         Cafe cafe = new Cafe("Tatte", "Boston");
