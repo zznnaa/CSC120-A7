@@ -71,6 +71,7 @@ public class House extends Building {
         return name;
     }
 
+    //conditions for using elevator
     public void goToFloor(int floorNum) {
         if (floorNum != this.activeFloor+1 && floorNum != this.activeFloor-1 && this.hasElevator == false){
             throw new RuntimeException("This building does not have an elevator. You cannot go up / down the stairs more than one floor at a time.");
