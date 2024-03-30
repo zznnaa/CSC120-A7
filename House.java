@@ -6,12 +6,22 @@ public class House extends Building {
     private boolean hasDiningRoom;
     private boolean hasElevator;
 
-    public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
+    //Default constructor with dining room & elevator
+    public House(String name, String address, int nFloors, boolean diningRoom, boolean elevator) {
         //super begins to construct House from parent class
         super(name, address, nFloors);
         this.residents = new ArrayList <String> ();
-        this.hasDiningRoom = hasDiningRoom;
-        this.hasElevator = hasElevator;
+        this.hasDiningRoom = diningRoom;
+        this.hasElevator = elevator;
+    }
+
+    //Overloaded constructor with no dining room or elevator
+    public House(String name, String address, int nFloors) {
+        //super begins to construct House from parent class
+        super(name, address, nFloors);
+        this.residents = new ArrayList <String> ();
+        this.hasDiningRoom = false;
+        this.hasElevator = false;
     }
 
     //says whether the house has a dining room
@@ -49,11 +59,21 @@ public class House extends Building {
      * @throws RuntimeException Resident already belongs to the house.
      */
     public void moveIn(String name) {
-        if (isResident(name) == false) {
-            this.residents.add(name);
-        } else {
+        if (isResident(name) == true) {
+          throw new RuntimeException("This person is already a resident.");
+        }
+        this.residents.add(name);
+    }
+
+    //moves resident with accomodations into a house
+    public void moveIn(String name, boolean accomodations){
+        if (isResident(name) == true) {
             throw new RuntimeException("This person is already a resident.");
         }
+        if (accomodations == true && this.hasElevator == false) {
+            throw new RuntimeException("This person cannot move into a House without an elevator.");
+        }
+        this.residents.add(name);
     }
 
     /**
@@ -63,11 +83,10 @@ public class House extends Building {
      * @throws RuntimeException Resident is not part of the house.
      */
     public String moveOut(String name) {
-        if (isResident(name) == true) {
-            this.residents.remove(name);
-        } else {
+        if (isResident(name) == false) {
             throw new RuntimeException("This person is not a resident.");
         }
+        this.residents.remove(name);
         return name;
     }
 
@@ -84,10 +103,10 @@ public class House extends Building {
     }
 
     public static void main(String[] args) {
-        House house = new House("home", "624", 5, true, true);
+        House house = new House("home", "624", 5, true, false);
         System.out.println(house);
         try {
-            house.moveIn("Zoe");
+            house.moveIn("Zoe", true);
         } catch (RuntimeException e) {
             System.out.println(e);
         }

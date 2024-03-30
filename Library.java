@@ -5,25 +5,16 @@ public class Library extends Building {
     private Hashtable <String, Boolean> collection;
     private boolean hasElevator;
 
-    public Library(String name, String address, int nFloors, boolean hasElevator) {
+    public Library(String name, String address, int nFloors) {
         super(name, address, nFloors);
         this.collection = new Hashtable <String, Boolean> ();
-        this.hasElevator = hasElevator;
-    }
-
-    //says whether the library has an elevator
-    public boolean hasElevator() {
-        if (this.hasElevator == true) {
-            return true;
-        } else {
-            return false;
-        }
+        this.hasElevator = true;
     }
 
     //conditions for using elevator
     public void goToFloor(int floorNum) {
-        if (floorNum != this.activeFloor+1 && floorNum != this.activeFloor-1 && this.hasElevator == false){
-            throw new RuntimeException("This building does not have an elevator. You cannot go up / down the stairs more than one floor at a time.");
+        if (floorNum != this.activeFloor+1 && floorNum != this.activeFloor-1){
+            System.out.println("You used the elevator!");
         }
         super.goToFloor(floorNum);
     }
@@ -143,7 +134,7 @@ public class Library extends Building {
     }
 
     public static void main(String[] args) {
-        Library library = new Library("San Mateo Public Library", "downtown", 4, true);
+        Library library = new Library("San Mateo Public Library", "downtown", 4);
         System.out.println(library);
         try {
             library.addTitle("The Little Engine That Could");
@@ -162,7 +153,6 @@ public class Library extends Building {
         library.returnBook("The Little Engine That Could");
         library.printCollection();
 
-        System.out.println(library.hasElevator());
         library.enter();
         library.goToFloor(4);
         library.goDown();
