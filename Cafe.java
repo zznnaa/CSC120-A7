@@ -5,7 +5,7 @@ public class Cafe extends Building {
     private int nCreams;
     private int nCups;
 
-    //default constructor
+    /* Default constructor */
     public Cafe(String name, String address) {
         super(name, address);
         this.nCoffeeOunces = 20;
@@ -14,7 +14,7 @@ public class Cafe extends Building {
         this.nCups = 5;
     }
 
-    //overloaded constructor with variable starting stock
+    /* Overloaded constructor with customizable stock */
     public Cafe(String name, String address, int coffeeOunces, int sugarPackets, int creams, int cups){
         super(name, address);
         this.nCoffeeOunces = coffeeOunces;
@@ -69,7 +69,17 @@ public class Cafe extends Building {
 
     }
 
-    //overloaded sellCoffee with variable restocking
+    /**
+     * Sells a coffee from the cafe while using customized restocking amounts.
+     *
+     * @param size Size of ordered coffee.
+     * @param nSugarPackets Number of sugar packets ordered in coffee.
+     * @param nCreams Splashes of cream ordered in coffee.
+     * @param restockCoffee Amount to restock coffee.
+     * @param restockSugarPackets Amount to restock sugar packets.
+     * @param restockCream Amount to restock splashes of cream.
+     * @param restockCups Amount to restock cups.
+     */
     public void sellCoffee(int size, int nSugarPackets, int nCreams,
                            int restockCoffee, int restockSugarPackets, int restockCream, int restockCups) {
         //evalutates if order will go below inventory

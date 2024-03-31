@@ -6,7 +6,7 @@ public class House extends Building {
     private boolean hasDiningRoom;
     private boolean hasElevator;
 
-    //Default constructor with dining room & elevator
+    /* Default constructor */
     public House(String name, String address, int nFloors, boolean diningRoom, boolean elevator) {
         //super begins to construct House from parent class
         super(name, address, nFloors);
@@ -15,7 +15,7 @@ public class House extends Building {
         this.hasElevator = elevator;
     }
 
-    //Overloaded constructor with no dining room or elevator
+    /* Overloaded constructor with no dining room or elevator */
     public House(String name, String address, int nFloors) {
         //super begins to construct House from parent class
         super(name, address, nFloors);
@@ -67,7 +67,13 @@ public class House extends Building {
         System.out.println("Success!");
     }
 
-    //overloaded moveIn - moves resident with accomodations into a house
+    /**
+     * Moves a resident with accomodations into the house.
+     *
+     * @param name The name of the resident.
+     * @param accomodations Whether the resident has accomodations / needs an elevator.
+     * @throws RuntimeException Resident already belongs to the house.
+     */
     public void moveIn(String name, boolean accomodations){
         System.out.print("Moving resident (with accomodations) in...");
         if (isResident(name) == true) {

@@ -6,6 +6,7 @@ public class Library extends Building {
     private boolean hasElevator;
     private String mediaType;
 
+    /* Default constructor */
     public Library(String name, String address, int nFloors) {
         super(name, address, nFloors);
         this.collection = new Hashtable <String, Boolean> ();
@@ -13,7 +14,7 @@ public class Library extends Building {
         this.mediaType = "books";
     }
 
-    //overloaded library constructor?
+    /* Overloaded constructor with customizable mediaType */
     public Library(String name, String address, int nFloors, String mediaType){
         super(name, address, nFloors);
         this.collection = new Hashtable <String, Boolean> ();
@@ -50,7 +51,12 @@ public class Library extends Building {
         return avaliability;
         }
 
-    //overloaded isAvaliable method to check whether all books are avaliable / unavaliable
+    /**
+     * Checks whether all titles are avaliable / unavaliable to check out in the library.
+     *
+     * @param avaliable T/F Whether books checked in or out.
+     * @return T/F Whether titles are avaliable to check out.
+     */
     public boolean isAvaliable(boolean avaliable) {
         //checks if title contained in library
         if (collection.containsKey(false) == false && avaliable == true) {
@@ -152,6 +158,10 @@ public class Library extends Building {
         }
     }
 
+    public void showOptions() {
+        System.out.println("Available options at " + this.name + ":\n + containsTitle(t) \n + isAvaliable(t) \n + addTitle(t) \n + removeTitle(t) \n + checkOut(t) \n + returnBook(t) \n + printCollection() \n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)");
+    }
+
     public static void main(String[] args) {
         Library library = new Library("San Mateo Public Library", "downtown", 4, "video games");
         System.out.println(library);
@@ -173,6 +183,7 @@ public class Library extends Building {
         }
         library.printCollection();
 
+        library.showOptions();
         library.enter();
         library.goToFloor(4);
         library.goDown();
