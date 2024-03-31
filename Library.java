@@ -4,11 +4,21 @@ public class Library extends Building {
 
     private Hashtable <String, Boolean> collection;
     private boolean hasElevator;
+    private String mediaType;
 
     public Library(String name, String address, int nFloors) {
         super(name, address, nFloors);
         this.collection = new Hashtable <String, Boolean> ();
         this.hasElevator = true;
+        this.mediaType = "books";
+    }
+
+    //overloaded library constructor?
+    public Library(String name, String address, int nFloors, String mediaType){
+        super(name, address, nFloors);
+        this.collection = new Hashtable <String, Boolean> ();
+        this.hasElevator = true;
+        this.mediaType = mediaType;
     }
 
     //conditions for using elevator
@@ -33,13 +43,22 @@ public class Library extends Building {
      */
     public boolean isAvaliable(String title) {
         //checks if title contained in library
-        if (collection.containsKey(title) == true) {
-            boolean avaliability = collection.get(title);
-            return avaliability;
-            //throws exception otherwise
-        } else {
-            throw new RuntimeException("This title is not contained in the library.");
+        if (containsTitle(title) != true) {
+            throw new RuntimeException("This title is not avaliable in the library.");
         }
+        boolean avaliability = collection.get(title);
+        return avaliability;
+        }
+
+    //overloaded isAvaliable method to check whether all books are avaliable / unavaliable
+    public boolean isAvaliable(boolean avaliable) {
+        //checks if title contained in library
+        if (collection.containsKey(false) == false && avaliable == true) {
+            System.out.println("All items are currently avaliable in the library");
+        } if (collection.containsKey(true) == false && avaliable == false) {
+            System.out.println("All items are checked out of the library.");
+        }
+        return avaliable;
     }
 
     /**
@@ -88,14 +107,14 @@ public class Library extends Building {
             if (this.isAvaliable(title) == true) {
                 //change value of title in collection
                 collection.put(title, false);
+                System.out.println("Success!");
             } else {
-                System.out.println("Another patron has already checked out this book.");
+                System.out.println("Another patron has already checked out this item.");
             }
             //catches if book not in collection
         } catch (RuntimeException e) {
             System.out.println(e);
         }
-        System.out.println("Success!");
     }
 
     /**
@@ -110,14 +129,14 @@ public class Library extends Building {
             if (this.isAvaliable(title) == false) {
                 //changes value of title in collection
                 collection.put(title, true);
+                System.out.println("Success!");
             } else {
-                System.out.println("This book hasn't been checked out.");
+                System.out.println("This item hasn't been checked out.");
             }
             //catches exception if book not in collection
         } catch (RuntimeException e) {
             System.out.println(e);
         }
-        System.out.println("Success!");
     }
 
     //prints contents of the collection
@@ -125,7 +144,7 @@ public class Library extends Building {
         System.out.println(this.name + " Collection:");
         //checks if any books in collection
         if (this.collection.size() == 0) {
-            System.out.println("This collection does not currently contain any books.");
+            System.out.println("This collection does not currently contain any items.");
         } else {
             //iterates through each value in hashtable and prints (although can do any action)
             this.collection.forEach((key, value)
@@ -134,23 +153,24 @@ public class Library extends Building {
     }
 
     public static void main(String[] args) {
-        Library library = new Library("San Mateo Public Library", "downtown", 4);
+        Library library = new Library("San Mateo Public Library", "downtown", 4, "video games");
         System.out.println(library);
         try {
-            library.addTitle("The Little Engine That Could");
+            library.addTitle("Civilization IV");
         } catch (RuntimeException e) {
             System.out.println(e);
         }
-        library.checkOut("The Little Engine That Could");
+        library.isAvaliable(true);
+        library.returnBook("Civilization IV");
+        library.checkOut("Civilization IV");
         library.printCollection();
-        System.out.println(library.isAvaliable("The Little Engine That Could"));
-        System.out.println(library.containsTitle("The Little Engine That Could"));
+        //System.out.println(library.isAvaliable("Civilization IV"));
+        //System.out.println(library.containsTitle("Civilization IV"));
         try {
-            library.removeTitle("The Little Engine That Could");
+            library.removeTitle("Civilization IV");
         } catch (RuntimeException e) {
             System.out.println(e);
         }
-        library.returnBook("The Little Engine That Could");
         library.printCollection();
 
         library.enter();
