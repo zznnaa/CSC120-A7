@@ -2,34 +2,34 @@ import java.util.Hashtable;
 
 public class Library extends Building {
 
-    private Hashtable <String, Boolean> collection;
+    private Hashtable < String, Boolean > collection;
     private boolean hasElevator;
     private String mediaType;
 
     /* Default constructor */
     public Library(String name, String address, int nFloors) {
         super(name, address, nFloors);
-        this.collection = new Hashtable <String, Boolean> ();
+        this.collection = new Hashtable < String, Boolean > ();
         this.hasElevator = true;
         this.mediaType = "books";
     }
 
     /* Overloaded constructor with customizable mediaType */
-    public Library(String name, String address, int nFloors, String mediaType){
+    public Library(String name, String address, int nFloors, String mediaType) {
         super(name, address, nFloors);
-        this.collection = new Hashtable <String, Boolean> ();
+        this.collection = new Hashtable < String, Boolean > ();
         this.hasElevator = true;
         this.mediaType = mediaType;
     }
 
     //conditions for using elevator
     public void goToFloor(int floorNum) {
-        if (floorNum != this.activeFloor+1 && floorNum != this.activeFloor-1){
+        if (floorNum != this.activeFloor + 1 && floorNum != this.activeFloor - 1) {
             System.out.println("You used the elevator!");
         }
         super.goToFloor(floorNum);
     }
-    
+
     //says whether title contained in collection
     public boolean containsTitle(String title) {
         return collection.containsKey(title);
@@ -49,7 +49,7 @@ public class Library extends Building {
         }
         boolean avaliability = collection.get(title);
         return avaliability;
-        }
+    }
 
     /**
      * Checks whether all titles are avaliable / unavaliable to check out in the library.
@@ -61,7 +61,8 @@ public class Library extends Building {
         //checks if title contained in library
         if (collection.containsKey(false) == false && avaliable == true) {
             System.out.println("All items are currently avaliable in the library");
-        } if (collection.containsKey(true) == false && avaliable == false) {
+        }
+        if (collection.containsKey(true) == false && avaliable == false) {
             System.out.println("All items are checked out of the library.");
         }
         return avaliable;

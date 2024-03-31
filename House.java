@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class House extends Building {
 
-    private ArrayList <String> residents;
+    private ArrayList < String > residents;
     private boolean hasDiningRoom;
     private boolean hasElevator;
 
@@ -10,7 +10,7 @@ public class House extends Building {
     public House(String name, String address, int nFloors, boolean diningRoom, boolean elevator) {
         //super begins to construct House from parent class
         super(name, address, nFloors);
-        this.residents = new ArrayList <String> ();
+        this.residents = new ArrayList < String > ();
         this.hasDiningRoom = diningRoom;
         this.hasElevator = elevator;
     }
@@ -19,7 +19,7 @@ public class House extends Building {
     public House(String name, String address, int nFloors) {
         //super begins to construct House from parent class
         super(name, address, nFloors);
-        this.residents = new ArrayList <String> ();
+        this.residents = new ArrayList < String > ();
         this.hasDiningRoom = false;
         this.hasElevator = false;
     }
@@ -61,7 +61,7 @@ public class House extends Building {
     public void moveIn(String name) {
         System.out.print("Moving resident in...");
         if (isResident(name) == true) {
-          throw new RuntimeException("This person is already a resident.");
+            throw new RuntimeException("This person is already a resident.");
         }
         this.residents.add(name);
         System.out.println("Success!");
@@ -74,7 +74,7 @@ public class House extends Building {
      * @param accomodations Whether the resident has accomodations / needs an elevator.
      * @throws RuntimeException Resident already belongs to the house.
      */
-    public void moveIn(String name, boolean accomodations){
+    public void moveIn(String name, boolean accomodations) {
         System.out.print("Moving resident (with accomodations) in...");
         if (isResident(name) == true) {
             throw new RuntimeException("This person is already a resident.");
@@ -104,7 +104,7 @@ public class House extends Building {
 
     //conditions for using elevator
     public void goToFloor(int floorNum) {
-        if (floorNum != this.activeFloor+1 && floorNum != this.activeFloor-1 && this.hasElevator == false){
+        if (floorNum != this.activeFloor + 1 && floorNum != this.activeFloor - 1 && this.hasElevator == false) {
             throw new RuntimeException("This building does not have an elevator. You cannot go up / down the stairs more than one floor at a time.");
         }
         super.goToFloor(floorNum);
@@ -134,7 +134,7 @@ public class House extends Building {
         house.goUp();
         house.goDown();
         house.goToFloor(5);
-        
+
     }
 
 }
